@@ -17,6 +17,9 @@ class OpnPaymentsServiceProvider extends ServiceProvider {
             __DIR__ . '/Listeners/OpnPaymentHandler.php' => app_path('Listeners/OpnPaymentHandler.php'),
             __DIR__ . '/../views/payment.blade.php'      => base_path('resources/views/payment.blade.php'),
 
+            __DIR__ . '/../views/assets/opn-script.js' => public_path('opn-payments/opn-script.js'),
+            __DIR__ . '/../views/assets/opn-style.css' => public_path('opn-payments/opn-style.css'),
+
             __DIR__ . '/../migrations/2022_10_28_190105_create_opn_payments_table.php' => base_path('database/migrations/2022_10_28_190105_create_opn_payments_table.php'),
         ]);
     }
@@ -33,6 +36,7 @@ class OpnPaymentsServiceProvider extends ServiceProvider {
 
         Route::get('/opn-payments/methods/{orderId}', [PaymentController::class, 'payJsForm']);
         Route::get('/opn-payments/{orderId}',  [PaymentController::class, 'renderPayment']);
+        Route::get('/opn-payments/status/{orderId}',  [PaymentController::class, 'status']);
         Route::post('/opn-payments/charge/{orderId}',  [PaymentController::class, 'charge']);
         Route::any('/opn-payments/complete/{orderId}',  [PaymentController::class, 'complete']);
     }

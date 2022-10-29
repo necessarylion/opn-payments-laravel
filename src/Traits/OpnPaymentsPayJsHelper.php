@@ -17,16 +17,17 @@ trait OpnPaymentsPayJsHelper {
     }
 
     public static function getQR($source) {
-        $qrCode = null;
-        if ($source) {
-            $scan = $source->scannable_code;
-            if ($scan && $scan->image) {
-                $qrCode = $scan->image->download_uri;
-            }
+        if (!$source) {
+            return null;
         }
-        return $qrCode;
+        $scan = $source->scannable_code;
+        if ($scan && $scan->image) {
+            $qrCode = $scan->image->download_uri;
+            return $qrCode;
+        }
+        return null;
     }
-
+    
     public static function paymentSuccessful($charge, $attempt) {
         return (
             $attempt->manual_capture 

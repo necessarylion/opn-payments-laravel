@@ -1,0 +1,204 @@
+body {
+    margin: 0;
+    background: #0909091a;
+    font-family: Circular, Arial, sans-serif;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.left {
+    width: 350px;
+    background: var(--themeColor);
+    border-radius: 5px 0px 0px 5px;
+    padding: 30px 25px 20px 25px;
+}
+.right {
+    border-radius: 0px 5px 5px 0px;
+    background: #FFFFFF;
+}
+iframe {
+    height: 600px;
+    background: #FFFFFF;
+    border-radius: 0px 5px 5px 0px;
+}
+.back-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.shop-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.logo {
+    margin-top: -42px;
+}
+.primary {
+    color: var(--primaryTextColor);
+    margin-bottom: 1px;
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.back {
+    margin-right: 5px;
+    height: 26px;
+}
+.back-text {
+    color: var(--primaryTextColor);
+    margin-bottom: 1px;
+    margin-top: 0px;
+}
+.secondary {
+    margin-top: 5px;
+    color: var(--secondaryTextColor);
+    font-weight: normal;
+    font-size: 14px;
+}
+.qr-container {
+    display: none;
+    background: white;
+    width: 400px;
+    height: 604.5px;
+    position: absolute;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0px 5px 5px 0px;
+}
+.download-qr {
+    display: block;
+    width: 300px;
+    height: 44px;
+    border: 0px;
+    background-color: #e0e0e0;
+    color: var(--themeColor);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    user-select: none;
+    transition: background-color 0.2s ease 0s;
+}
+.complete-payment {
+    display: block;
+    width: 300px;
+    height: 44px;
+    border: 0px;
+    background-color: var(--themeColor);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    user-select: none;
+    transition: background-color 0.2s ease 0s;
+}
+.secured-by {
+    position: absolute;
+    width: 400px;
+    display: flex;
+    z-index: 4;
+    background: transparent;
+    align-items: flex-end;
+    justify-content: center;
+    bottom: 95px;
+}
+.secured-by-bottom {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+.secured-by-logo {
+    margin-top: 4px;
+    margin-left: 8px;
+}
+@media only screen and (max-width: 798px) {
+    .left {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        border-radius: 0px;
+        height: 180px;
+        padding: 0px;
+        padding-top: 20px;
+    }
+    .left-box {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .right {
+        position: absolute;
+        top: 0px;
+        margin-top: 147px;
+        z-index: 3;
+        border-radius: 5px;
+    }
+    iframe, .qr-container {
+        border-radius: 5px;
+        height: 600px;
+    }
+    .secured-by {
+        bottom: 10px;
+    }
+}
+@media only screen and (max-width: 390px) {
+    .left {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        border-radius: 0px;
+        height: 180px;
+        padding: 0px;
+        padding-top: 20px;
+    }
+    .left-box {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    .right {
+        z-index: 3;
+        border-radius: 5px;
+        position: absolute;
+        top: 0px;
+        margin-top: 147px;
+    }
+    .qr-container {
+        max-width: 350px;
+    }
+    iframe, .qr-container {
+        max-width: 350px;
+        border-radius: 5px;
+        height: 600px;
+    }
+    .secured-by {
+        max-width: 330px;
+        bottom: 10px
+    }
+}

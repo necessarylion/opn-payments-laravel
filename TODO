@@ -1,2 +1,2 @@
-1. handle redirect url and qr code in frontend payment.blade.php
-2. create scheduler class to handle pending charges
+1. create scheduler class to handle pending charges
+2. svg to png and download

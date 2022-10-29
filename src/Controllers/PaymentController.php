@@ -107,4 +107,32 @@ class PaymentController extends Controller {
         OpnPaymentCompleted::dispatch($attempt);
         return redirect($attempt->redirect_uri);
     }
+
+    public function status($orderId) {
+        $attempt       = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
+        $paymentCharge = $attempt->charge();
+        if (!$attempt) {
+            return ['status' => false];
+        }
+
+        if (!$paymentCharge) {
+            return ['status' => false];
+        }
+
+        $result                            = OpnPayments::charge()->retrieve($paymentCharge->charge_id);
+        $paymentSuccessful                 = OpnPayments::paymentSuccessful($result, $attempt);
+        $paymentCharge->payment_successful = $paymentSuccessful;
+        $paymentCharge->status             = $result->status;
+        $paymentCharge->failure_code       = $result->failure_code;
+        $paymentCharge->save();
+        $attempt->payment_successful = $paymentSuccessful;
+        $attempt->save();
+
+        if ($result->status != OpnPaymentsCharge::STATUS_PENDING) {
+            OpnPaymentCompleted::dispatch($attempt);
+            return ['status' => true];
+        }
+
+        return ['status' => false];
+    }
 }
