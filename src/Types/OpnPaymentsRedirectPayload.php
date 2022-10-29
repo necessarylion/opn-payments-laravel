@@ -7,7 +7,7 @@ class OpnPaymentsRedirectPayload {
     public $currency              = 'thb';
     public ?Array $paymentMethods = ['credit_card'];
     public ?Array $metaData       = [];
-    public $language              = 'en';
+    public $locale                = 'en';
     public $redirectUri;
     public $cancelUri;
 }

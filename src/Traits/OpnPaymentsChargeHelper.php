@@ -19,7 +19,7 @@ trait OpnPaymentsChargeHelper {
         $attempt->meta_data       = $payload->metaData;
         $attempt->amount          = $payload->amount;
         $attempt->currency        = $payload->currency;
-        $attempt->language        = $payload->language;
+        $attempt->language        = $payload->locale;
         $attempt->redirect_uri    = $payload->redirectUri;
         $attempt->cancel_uri      = $payload->cancelUri;
         $attempt->save();
