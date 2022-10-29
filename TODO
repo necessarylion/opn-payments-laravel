@@ -1,0 +1,9 @@
+1. Create controller to create charge and internal return url
+    - redirect_url GET /opn-payment/{orderId}
+
+2. Create a POST method to create charge from front end to backend end
+    - POST /opn-payment/charge/{orderId}
+    - redirect_url GET /opn-payment/complete/{orderId}
+
+2. handle redirect url and qr code in frontend payment.blade.php
+3. handle redirect url after payment completed to update the charge status

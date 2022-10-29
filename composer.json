@@ -1,0 +1,41 @@
+{
+    "name": "necessarylion/opn-payments-laravel",
+    "description": "Laravel package for Opn Payments",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "OpnPayments\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Necessary Lion",
+            "email": "necessarylion@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "omise/omise-php": "^2.16",
+        "illuminate/support": "^8.77|^9.27"
+    },
+    "scripts": {
+        "fix": [
+          "vendor/bin/php-cs-fixer fix"
+        ],
+        "test" : [
+          "./vendor/bin/phpunit tests --testdox"
+        ]
+      },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OpnPayments\\OpnPaymentsServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.12",
+        "phpunit/phpunit": "^9.5"
+    }
+}
