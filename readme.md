@@ -15,12 +15,12 @@ php artisan vendor:publish --provider="OpnPayments\OpnPaymentsServiceProvider" -
 php artisan migrate
 ```
 
-3. ***Register Event Listener (optional)***
-Register `OpnPaymentCompleted` class in `app/Providers/EventServiceProvider.php` to handle your order, sending email etc...
+4. ***Register Event Listener (optional)***
+- Register `OpnPaymentCompleted` class in `app/Providers/EventServiceProvider.php` to handle your order, sending email etc...
 ```php
 public function boot()
 {
-    ....
+    ...
     Event::listen(
         OpnPaymentCompleted::class,
         [\App\Listeners\OpnPaymentHandler::class, 'handle']
@@ -47,7 +47,7 @@ return redirect(OpnPayments::getRedirectUrl($payload)->authorized_uri);
 
 ```json
 {
-    ....
+    ...
     "repositories": {
         "opn-payments-laravel" : {
             "type": "path",
@@ -62,7 +62,7 @@ return redirect(OpnPayments::getRedirectUrl($payload)->authorized_uri);
 
 ```json
 "require": {
-    ....
+    ...
     "necessarylion/opn-payments-laravel" : "@dev"
 },
 ```
