@@ -43,6 +43,29 @@ $payload->paymentMethods = OpnPayments::paymentMethods();
 return redirect(OpnPayments::getRedirectUrl($payload)->authorized_uri);
 ```
 
+#### Handle payment completed
+
+- in `app/Listeners/OpnPaymentHandler.php`, you can check the status of payment attempt.
+- then you can do handling your order, sending email etc..
+
+```php
+public function handle(OpnPaymentCompleted $event) {
+    $attempt = $event->attempt;
+    if ($attempt->payment_successful) {
+        // handle payment success here
+    } else {
+        // handle payment failed here
+    }
+}
+```
+
+- to get latest charge of payment attempt, you can do
+
+```php
+$charge = $attempt->charge();
+$opnChargeId = $charge->charge_id;
+```
+
 #### Development
 
 ```json
