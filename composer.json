@@ -3,6 +3,16 @@
     "description": "Laravel package for Opn Payments",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "opn payments",
+        "opn sdk",
+        "omise sdk",
+        "omise",
+        "omise payments",
+        "omise-php",
+        "opn-payment-php",
+        "omise laravel"
+    ],
     "autoload": {
         "psr-4": {
             "OpnPayments\\": "src/"
@@ -16,8 +26,7 @@
     ],
     "require": {
         "php": ">=7.4",
-        "omise/omise-php": "^2.16",
-        "illuminate/support": "^8.77|^9.27"
+        "omise/omise-php": "^2.16"
     },
     "scripts": {
         "fix": [
