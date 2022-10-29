@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('order_id', 255)->unique();
             $table->boolean('payment_successful')->default(false);
             $table->boolean('test_mode')->default(true);
+            $table->boolean('manual_capture')->default(false);
             $table->integer('amount')->default(0);
             $table->string('currency', 10)->default('thb');
             $table->string('language', 10)->default('en');

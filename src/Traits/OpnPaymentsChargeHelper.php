@@ -7,9 +7,8 @@ use OpnPayments\Types\OpnPaymentsChargePayload;
 use OpnPayments\Types\OpnPaymentsRedirectPayload;
 
 trait OpnPaymentsChargeHelper {
-
     /**
-     * @param OpnPaymentsRedirectPayload $payload
+     * @param  OpnPaymentsRedirectPayload $payload
      * @return OpnPaymentsAttempt
      */
     public static function getRedirectUrl(OpnPaymentsRedirectPayload $payload) {
@@ -30,7 +29,7 @@ trait OpnPaymentsChargeHelper {
     /**
      * get available payment method arrays
      *
-     * @return Array
+     * @return Object
      */
     public static function createCharge(OpnPaymentsChargePayload $charge) {
         $chargePayload = $charge->toArray();

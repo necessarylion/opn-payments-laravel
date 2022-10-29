@@ -10,13 +10,13 @@
     <script type='text/javascript' src='https://cdn.omise.co/omise.js'></script>
 </body>
 <script type='text/javascript'>
-
     const amount = '{{$amount}}';
     const currency = '{{$currency}}';
     const publicKey = '{{$publicKey}}';
     const otherPaymentMethods = {!! $paymentMethods !!};
-    const backgroundColor = '{{$theme}}'
-    const locale = '{{$locale}}'
+    const backgroundColor = '{{$theme}}';
+    const locale = '{{$locale}}';
+    const style =  {!! $style !!};
 
     window.addEventListener('load', (e) => {
         e.preventDefault();
@@ -42,33 +42,7 @@
             submitAuto: 'no',
             image: '',
             otherPaymentMethods : otherPaymentMethods,
-            style: {
-                fontFamily: 'Circular,Arial,sans-serif',
-                defaultSelectPaymentMethods: true,
-                closeButton: {
-                    visible: false,
-                },
-                methodsListSection: {
-                    maxHeight: '455px',
-                    scrollY: true,
-                },
-                body: {
-                    width: '100%',
-                    padding: {
-                        desktop: '1px 36px',
-                        mobile: '1px 36px',
-                    },
-                },
-                submitButton: {
-                    backgroundColor,
-                    textColor: 'white',
-                },
-                securedBySection: {
-                    position: 'fixed',
-                    left: '0px',
-                    bottom: '26px',
-                },
-            },
+            style,
             onCreateTokenSuccess: function(token) {
                 parent.postMessage({
                     message: 'charge',

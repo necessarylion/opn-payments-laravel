@@ -2,7 +2,7 @@
 namespace OpnPayments\Types;
 
 use Exception;
-use OpnPayments\OpnPayments;
+use Illuminate\Support\Str;
 
 class OpnPaymentsChargePayload {
     public $amount;
@@ -12,6 +12,7 @@ class OpnPaymentsChargePayload {
     public $cardId   = null;
     public $ip;
     public $customerId;
+    public $token                        = null;
     public ?OpnPaymentsCardPayload $card = null;
     public $description;
     public Array $metaData = [];
@@ -21,12 +22,13 @@ class OpnPaymentsChargePayload {
           && empty($this->customerId)
           && empty($this->card)
           && empty($this->cardId)
+          && empty($this->token)
         ) {
-            throw new Exception('Either source ID, card ID, customer ID or card must be applied');
+            throw new Exception('Either source ID, card ID, customer ID, card  or token must be applied');
         }
 
         $payload = [
-            'amount'      => $this->castAmount(),
+            'amount'      => $this->amount,
             'currency'    => $this->currency,
             'return_uri'  => $this->returnUri,
             'description' => $this->description,
@@ -40,10 +42,13 @@ class OpnPaymentsChargePayload {
         if (!empty($this->cardId)) {
             $payload['card'] = $this->cardId;
         }
+        if (!empty($this->token)) {
+            if (Str::startsWith($this->token, 'tokn_')) {
+                $payload['card'] = $this->token;
+            } else {
+                $payload['source'] = $this->token;
+            }
+        }
         return $payload;
-    }
-
-    public function castAmount() {
-        return OpnPayments::castCurrency($this->amount, $this->currency);
     }
 }

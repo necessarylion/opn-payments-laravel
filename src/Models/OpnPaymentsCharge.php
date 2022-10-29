@@ -9,6 +9,10 @@ class OpnPaymentsCharge extends Model {
     use HasFactory;
     use SoftDeletes;
 
+    const STATUS_PENDING = 'pending';
+    const STATUS_SUCCESS = 'successful';
+    const STATUS_FAILED  = 'failed';
+
     protected $guarded = [];
 
     protected $casts = [
