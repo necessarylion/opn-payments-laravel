@@ -1,6 +1,7 @@
 {
     "name": "necessarylion/opn-payments-laravel",
     "description": "Laravel package for Opn Payments",
+    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "keywords": [

@@ -42,7 +42,7 @@ return [
         ],
         'securedBySection' => [
             'position' => 'fixed',
-            'left'     => '0px',
+            'left'     => '-600px',
             'bottom'   => '40px',
         ],
     ],

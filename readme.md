@@ -1,5 +1,9 @@
 ## Opn Payment Laravel
 
+![php](https://badgen.net/badge/icon/php?icon=packagist&label=Laravel&nbsp;Package) ![php](https://badgen.net/badge/Opn&nbsp;Payments/Laravel/red)
+
+This package is opn payments Laravel package using omise-php sdk. This package will help to generate redirect url with ready made payment form. You will only need to write few lines of code to create payment in your Laravel project. This package will handle all creating charge, handling complete payment automatically. We made it very easy to integrate payment system in your project. 
+
 #### Installation
 
 1. ***Install Package***
