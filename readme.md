@@ -1,8 +1,8 @@
 ## Opn Payment Laravel
 
-![php](https://badgen.net/badge/icon/php?icon=packagist&label=Laravel&nbsp;Package) ![php](https://badgen.net/badge/Opn&nbsp;Payments/Laravel/red)
+[![php](https://badgen.net/badge/icon/php?icon=packagist&label=Laravel&nbsp;Package)](https://packagist.org/packages/necessarylion/opn-payments-laravel) ![php](https://badgen.net/badge/Opn&nbsp;Payments/Laravel/red)
 
-This package is opn payments Laravel package using omise-php sdk. This package will help to generate redirect url with ready made payment form. You will only need to write few lines of code to create payment in your Laravel project. This package will handle all creating charge, handling complete payment automatically. We made it very easy to integrate payment system in your project. 
+This package is [Opn Payments (former name Omise)](https://opn.ooo) Laravel package using omise-php sdk. This package will help to generate redirect url with ready made payment form. You will only need to write few lines of code to create payment in your Laravel project. This package will handle all creating charge, handling complete payment automatically. We made it very easy to integrate payment system in your project. 
 
 #### Installation
 
@@ -22,14 +22,29 @@ php artisan migrate
 4. ***Register Event Listener (optional)***
 - Register `OpnPaymentCompleted` class in `app/Providers/EventServiceProvider.php` to handle your order, sending email etc...
 ```php
+
 public function boot()
 {
     ...
     Event::listen(
-        OpnPaymentCompleted::class,
+        \OpnPayments\Events\OpnPaymentCompleted::class,
         [\App\Listeners\OpnPaymentHandler::class, 'handle']
     );
 }
+```
+
+4. ***Add credentials in .env file***
+
+```s
+OPN_MODE=test  # test or live
+OPN_TEST_PUBLIC_KEY=pkey_***
+OPN_TEST_SECRET_KEY=skey_***
+```
+- Make sure that `APP_URL` include port if you are running on port
+- Example
+
+```s
+APP_URL=http://localhost:8000
 ```
 
 #### Create charge with redirect url
@@ -38,8 +53,8 @@ public function boot()
 $payload = new OpnPaymentsRedirectPayload();
 $payload->amount = 1000;
 $payload->currency = OpnPaymentsCurrency::THAILAND_BAHT;
-$payload->cancelUri = 'https://example.com';
-$payload->redirectUri = 'https://example.com';
+$payload->cancelUri = 'http://localhost:8000';
+$payload->redirectUri = 'http://localhost:8000';
 $payload->orderId = Str::uuid();
 $payload->locale = OpnPaymentsLocale::ENGLISH;
 $payload->paymentMethods = OpnPayments::paymentMethods();
@@ -47,7 +62,7 @@ $payload->paymentMethods = OpnPayments::paymentMethods();
 return redirect(OpnPayments::getRedirectUrl($payload)->authorized_uri);
 ```
 
-#### Handle payment completed
+### Handle payment completed
 
 - in `app/Listeners/OpnPaymentHandler.php`, you can check the status of payment attempt.
 - then you can do handling your order, sending email etc..
@@ -70,7 +85,12 @@ $charge = $attempt->charge();
 $opnChargeId = $charge->charge_id;
 ```
 
-#### Development
+### Want to contribute? Great! Fork the repo and create PR to us.
+
+#### Development Process
+
+- `mkdir packages`
+- `git clone git@github.com:necessarylion/opn-payments-laravel.git`
 
 ```json
 {
@@ -78,7 +98,7 @@ $opnChargeId = $charge->charge_id;
     "repositories": {
         "opn-payments-laravel" : {
             "type": "path",
-            "url" : "packages/omise-laravel",
+            "url" : "packages/opn-payments-laravel",
             "options": {
                 "symlink": true
             }
@@ -93,3 +113,4 @@ $opnChargeId = $charge->charge_id;
     "necessarylion/opn-payments-laravel" : "@dev"
 },
 ```
+- composer update
