@@ -1,10 +1,32 @@
 <?php
 namespace OpnPayments\Traits;
 
+use OpnPayments\Models\OpnPaymentsAttempt;
 use OpnPayments\OpnPayments;
 use OpnPayments\Types\OpnPaymentsChargePayload;
+use OpnPayments\Types\OpnPaymentsRedirectPayload;
 
 trait OpnPaymentsChargeHelper {
+
+    /**
+     * @param OpnPaymentsRedirectPayload $payload
+     * @return OpnPaymentsAttempt
+     */
+    public static function getRedirectUrl(OpnPaymentsRedirectPayload $payload) {
+        $attempt                  = new OpnPaymentsAttempt();
+        $attempt->order_id        = $payload->orderId;
+        $attempt->test_mode       = OpnPayments::mode() == 'test' ? true : false;
+        $attempt->payment_methods = $payload->paymentMethods;
+        $attempt->meta_data       = $payload->metaData;
+        $attempt->amount          = $payload->amount;
+        $attempt->currency        = $payload->currency;
+        $attempt->language        = $payload->language;
+        $attempt->redirect_uri    = $payload->redirectUri;
+        $attempt->cancel_uri      = $payload->cancelUri;
+        $attempt->save();
+        return $attempt;
+    }
+
     /**
      * get available payment method arrays
      *

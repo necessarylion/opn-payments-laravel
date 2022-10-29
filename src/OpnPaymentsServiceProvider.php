@@ -3,7 +3,7 @@ namespace OpnPayments;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use OpnPayments\Controllers\RedirectUrlController;
+use OpnPayments\Controllers\PaymentController;
 
 class OpnPaymentsServiceProvider extends ServiceProvider {
     /**
@@ -29,17 +29,7 @@ class OpnPaymentsServiceProvider extends ServiceProvider {
             return OpnPayments::init();
         });
 
-        Route::get('/opn-payments/methods/{amount}/{currency}', [RedirectUrlController::class, 'payJsForm']);
-
-        Route::get('/opn-payments/{orderId}', function($orderId) {
-            $amount   = 1000;
-            $currency = 'THB';
-            return view('payment', [
-                'amount'   => $amount, 
-                'currency' => $currency,
-                'backUrl'  => '#',
-                'theme'    => OpnPayments::getTheme(),
-            ]);
-        });
+        Route::get('/opn-payments/methods/{orderId}', [PaymentController::class, 'payJsForm']);
+        Route::get('/opn-payments/{orderId}',  [PaymentController::class, 'renderPayment']);
     }
 }

@@ -16,6 +16,7 @@
     const publicKey = '{{$publicKey}}';
     const otherPaymentMethods = {!! $paymentMethods !!};
     const backgroundColor = '{{$theme}}'
+    const locale = '{{$locale}}'
 
     window.addEventListener('load', (e) => {
         e.preventDefault();
@@ -27,7 +28,7 @@
         OmiseCard.open({
             amount,
             currency,
-            locale: '',
+            locale: locale,
             frameLabel: '',
             frameDescription: '',
             submitLabel: '',

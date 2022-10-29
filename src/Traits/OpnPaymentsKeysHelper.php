@@ -10,9 +10,10 @@ trait OpnPaymentsKeysHelper {
      * @return OpnPaymentsKeys
      */
     public static function key() {
+        $mode         = config('opn-payments.mode');
         $keys         = new OpnPaymentsKeys();
-        $keys->public = config('opn-payments.public_key');
-        $keys->secret = config('opn-payments.secret_key');
+        $keys->public = config('opn-payments.' . $mode . '.public_key');
+        $keys->secret = config('opn-payments.' . $mode . '.secret_key');
         return $keys;
     }
 
