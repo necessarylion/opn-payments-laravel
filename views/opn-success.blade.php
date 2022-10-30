@@ -42,7 +42,11 @@
             </table>
             <br>
             <a href="{{$attempt['redirect_uri']}}" class="button">Back to Merchant</a>
-
+            <br>
+            <div class="secured-by-bottom">
+                <span>Secured by </span>
+                <img src="https://www.opn.ooo/assets/svg/logo-opn-full.svg" class="secured-by-logo" height="20">
+            </div>
         </div>
     </div>
 </body>
