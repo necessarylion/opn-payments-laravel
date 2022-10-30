@@ -41,7 +41,10 @@
                 </tbody>
             </table>
             <br>
-            <a href="{{$attempt['redirect_uri']}}" class="button">Back to Merchant</a>
+            <div class="failed-buttons">
+                <a href="{{$attempt['authorized_uri']}}" class="retry-button">Retry Payment</a>
+                <a href="{{$attempt['redirect_uri']}}" class="failed-back-button">Back to Merchant</a>
+            </div>
             <br>
             <div class="secured-by-bottom">
                 <span>Secured by </span>

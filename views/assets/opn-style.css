@@ -84,7 +84,7 @@ iframe {
     border: 0px;
     background-color: #e0e0e0;
     color: var(--themeColor);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     line-height: 44px;
     text-align: center;
@@ -103,7 +103,7 @@ iframe {
     border: 0px;
     background-color: var(--themeColor);
     color: white;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     line-height: 44px;
     text-align: center;
@@ -230,7 +230,7 @@ iframe {
     border: 0px;
     background-color: var(--themeColor);
     color: white;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     line-height: 44px;
     text-align: center;
@@ -250,7 +250,55 @@ iframe {
     border-collapse: collapse;
 }
 .info .table td {
-    padding: 10px;
-    border:  0.5px solid #9a9a9a;
-    color: #4f4949;
+    padding: 10px 0px;
+    border-bottom: 2px solid #00000017;
+    color: #636366;
+    border-top: 2px solid #00000017;
+}
+.failed-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.info .retry-button {
+    display: block;
+    padding: 0px 20px 0px 20px;
+    height: 44px;
+    border: 0px;
+    background-color: #e8e8e8;
+    color: var(--themeColor);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 2px;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    user-select: none;
+    transition: background-color 0.2s ease 0s;
+}
+.info .failed-back-button {
+    display: block;
+    padding: 0px 20px 0px 20px;
+    height: 44px;
+    width: 100%;
+    border: 0px;
+    background-color: var(--themeColor);
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 2px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    user-select: none;
+    transition: background-color 0.2s ease 0s;
 }
