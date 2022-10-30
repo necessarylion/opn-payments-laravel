@@ -15,7 +15,9 @@ class OpnPaymentsServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/../config/opn-payments.php'      => config_path('opn-payments.php'),
             __DIR__ . '/Listeners/OpnPaymentHandler.php' => app_path('Listeners/OpnPaymentHandler.php'),
-            __DIR__ . '/../views/payment.blade.php'      => base_path('resources/views/payment.blade.php'),
+            __DIR__ . '/../views/opn-payment.blade.php'  => base_path('resources/views/opn-payment.blade.php'),
+            __DIR__ . '/../views/opn-success.blade.php'  => base_path('resources/views/opn-success.blade.php'),
+            __DIR__ . '/../views/opn-failed.blade.php'   => base_path('resources/views/opn-failed.blade.php'),
 
             __DIR__ . '/../views/assets/opn-script.js' => public_path('opn-payments/opn-script.js'),
             __DIR__ . '/../views/assets/opn-style.css' => public_path('opn-payments/opn-style.css'),
@@ -37,6 +39,8 @@ class OpnPaymentsServiceProvider extends ServiceProvider {
         Route::get('/opn-payments/methods/{orderId}', [PaymentController::class, 'payJsForm']);
         Route::get('/opn-payments/{orderId}',  [PaymentController::class, 'renderPayment']);
         Route::get('/opn-payments/status/{orderId}',  [PaymentController::class, 'status']);
+        Route::get('/opn-payments/success/{orderId}',  [PaymentController::class, 'success']);
+        Route::get('/opn-payments/failed/{orderId}',  [PaymentController::class, 'failed']);
         Route::post('/opn-payments/charge/{orderId}',  [PaymentController::class, 'charge']);
         Route::any('/opn-payments/complete/{orderId}',  [PaymentController::class, 'complete']);
     }

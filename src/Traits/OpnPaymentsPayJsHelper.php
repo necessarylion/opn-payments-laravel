@@ -27,7 +27,7 @@ trait OpnPaymentsPayJsHelper {
         }
         return null;
     }
-    
+
     public static function paymentSuccessful($charge, $attempt) {
         return (
             $attempt->manual_capture 

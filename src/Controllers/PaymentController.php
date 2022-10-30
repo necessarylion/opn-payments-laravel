@@ -35,8 +35,11 @@ class PaymentController extends Controller {
         if (!$attempt) {
             throw new Exception($orderId . ' Not found');
         }
+        if ($attempt->payment_successful) {
+            return redirect('/opn-payments/success/' . $attempt->order_id);
+        }
         $config = config('opn-payments');
-        return view('payment', [
+        return view('opn-payment', [
             'amount'   => $attempt->amount, 
             'currency' => $attempt->currency,
             'backUrl'  => $attempt->cancel_uri,
@@ -95,17 +98,12 @@ class PaymentController extends Controller {
         if (!$paymentCharge) {
             throw new Exception('Charge Not found');
         }
-        $result                            = OpnPayments::charge()->retrieve($paymentCharge->charge_id);
-        $paymentSuccessful                 = OpnPayments::paymentSuccessful($result, $attempt);
-        $paymentCharge->payment_successful = $paymentSuccessful;
-        $paymentCharge->status             = $result->status;
-        $paymentCharge->failure_code       = $result->failure_code;
-        $paymentCharge->save();
-        $attempt->payment_successful = $paymentSuccessful;
-        $attempt->save();
-
-        OpnPaymentCompleted::dispatch($attempt);
-        return redirect($attempt->redirect_uri);
+        $charge = $this->completePayment($attempt);
+        $paymentSuccessful = OpnPayments::paymentSuccessful($charge, $attempt);
+        if ($paymentSuccessful) {
+            return redirect('/opn-payments/success/' . $attempt->order_id);
+        }
+        return redirect('/opn-payments/failed/' . $attempt->order_id);
     }
 
     public function status($orderId) {
@@ -114,25 +112,66 @@ class PaymentController extends Controller {
         if (!$attempt) {
             return ['status' => false];
         }
-
         if (!$paymentCharge) {
             return ['status' => false];
         }
+        $charge = $this->completePayment($attempt);
+        if ($charge->status == OpnPaymentsCharge::STATUS_PENDING) {
+            return [ 'status' => false];
+        }
+        return ['status' => true];
+    }
 
-        $result                            = OpnPayments::charge()->retrieve($paymentCharge->charge_id);
-        $paymentSuccessful                 = OpnPayments::paymentSuccessful($result, $attempt);
+    public function success($orderId) {
+        $attempt = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
+        $charge = $this->completePayment($attempt);
+        if (!$attempt) {
+            return ['status' => false];
+        }
+        if (!$attempt->payment_successful) {
+            return redirect('/opn-payments/failed/' . $attempt->order_id);
+        }
+        return view('opn-success', [
+            'config'  => config('opn-payments'),
+            'attempt' => $attempt,
+            'charge' => $charge,
+        ]);
+    }
+
+    public function failed($orderId) {
+        $attempt = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
+        $charge  = $this->completePayment($attempt);
+        if (!$attempt) {
+            return ['status' => false];
+        }
+        if ($attempt->payment_successful) {
+            return redirect('/opn-payments/success/' . $attempt->order_id);
+        }
+        return view('opn-failed', [
+            'config'  => config('opn-payments'),
+            'attempt' => $attempt,
+            'charge' => $charge,
+        ]);
+    }
+
+    private function completePayment($attempt) {
+        $paymentCharge     = $attempt->charge();
+        if(!$paymentCharge) {
+            return null;
+        }
+        $charge            = OpnPayments::charge()->retrieve($paymentCharge->charge_id);
+        $paymentSuccessful = OpnPayments::paymentSuccessful($charge, $attempt);
+
         $paymentCharge->payment_successful = $paymentSuccessful;
-        $paymentCharge->status             = $result->status;
-        $paymentCharge->failure_code       = $result->failure_code;
+        $paymentCharge->status             = $charge->status;
+        $paymentCharge->failure_code       = $charge->failure_code;
         $paymentCharge->save();
         $attempt->payment_successful = $paymentSuccessful;
         $attempt->save();
 
-        if ($result->status != OpnPaymentsCharge::STATUS_PENDING) {
+        if ($charge->status != OpnPaymentsCharge::STATUS_PENDING) {
             OpnPaymentCompleted::dispatch($attempt);
-            return ['status' => true];
         }
-
-        return ['status' => false];
+        return $charge;
     }
 }

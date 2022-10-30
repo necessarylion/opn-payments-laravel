@@ -202,3 +202,55 @@ iframe {
         bottom: 10px
     }
 }
+
+.info .container {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.info .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 350px;
+    background: white;
+    border-radius: 5px;
+    padding: 50px 30px;
+}
+.info svg {
+    width: 150px;
+}
+.info .button {
+    display: block;
+    padding: 0px 30px 0px 30px;
+    height: 44px;
+    border: 0px;
+    background-color: var(--themeColor);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    user-select: none;
+    transition: background-color 0.2s ease 0s;
+}
+.info h2 {
+    text-align: center;
+}
+.info .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.info .table td {
+    padding: 10px;
+    border:  0.5px solid #9a9a9a;
+    color: #4f4949;
+}
