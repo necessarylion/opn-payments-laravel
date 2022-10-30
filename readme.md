@@ -49,7 +49,7 @@ OPN_LIVE_SECRET_KEY=skey_***
 APP_URL=http://localhost:8000
 ```
 
-#### Create charge with redirect url
+#### Create charge using redirect url function
 
 ```php
 $payload = new OpnPaymentsRedirectPayload();
@@ -64,7 +64,7 @@ $payload->paymentMethods = OpnPayments::paymentMethods();
 return redirect(OpnPayments::getRedirectUrl($payload)->authorized_uri);
 ```
 
-| **fields**     | **Type** | **Description**                                                                                                                                     |
+| **Fields**     | **Type** | **Description**                                                                                                                                     |
 |----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `amount`         | `int`      | Amount to charge                                                                                                                                    |
 | `currency`       | `string`   | Currency of the amount eg. THB, SGD, RGN. You can use `OpnPaymentsCurrency` helper class for this field                                             |
