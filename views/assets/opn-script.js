@@ -15,7 +15,7 @@ eventListener(messageEvent, async function (e) {
 });
 
 async function doCharge(token) {
-    const rawResponse = await fetch("/opn-payments/charge/" + orderId, {
+    const rawResponse = await fetch(route + "/charge/" + orderId, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -50,7 +50,7 @@ function listenForChargeStatus() {
 
 async function getChargeStatus() {
     totalTry++;
-    const rawResponse = await fetch("/opn-payments/status/" + orderId);
+    const rawResponse = await fetch(route + "/status/" + orderId);
     const result = await rawResponse.json();
     console.log(result.status);
     if (result.status) {

@@ -49,8 +49,9 @@ class OpnPaymentsAttempt extends Model {
     }
 
     public function authorizedUri(): Attribute {
+        $prefix = config('opn-payments.route_prefix', 'opn-payments');
         return Attribute::make(
-            get: fn ($value, $attr) => config('app.url') . '/opn-payments/' . $attr['order_id'] ,
+            get: fn ($value, $attr) => config('app.url') . "/$prefix/" . $attr['order_id'] ,
         );
     }
 }

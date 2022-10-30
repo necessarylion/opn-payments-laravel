@@ -36,12 +36,14 @@ class OpnPaymentsServiceProvider extends ServiceProvider {
             return OpnPayments::init();
         });
 
-        Route::get('/opn-payments/methods/{orderId}', [PaymentController::class, 'payJsForm']);
-        Route::get('/opn-payments/{orderId}',  [PaymentController::class, 'renderPayment']);
-        Route::get('/opn-payments/status/{orderId}',  [PaymentController::class, 'status']);
-        Route::get('/opn-payments/success/{orderId}',  [PaymentController::class, 'success']);
-        Route::get('/opn-payments/failed/{orderId}',  [PaymentController::class, 'failed']);
-        Route::post('/opn-payments/charge/{orderId}',  [PaymentController::class, 'charge']);
-        Route::any('/opn-payments/complete/{orderId}',  [PaymentController::class, 'complete']);
+        $prefix = config('opn-payments.route_prefix', 'opn-payments');
+
+        Route::get($prefix .'/methods/{orderId}', [PaymentController::class, 'payJsForm']);
+        Route::get($prefix .'/{orderId}',  [PaymentController::class, 'renderPayment']);
+        Route::get($prefix .'/status/{orderId}',  [PaymentController::class, 'status']);
+        Route::get($prefix .'/success/{orderId}',  [PaymentController::class, 'success']);
+        Route::get($prefix .'/failed/{orderId}',  [PaymentController::class, 'failed']);
+        Route::post($prefix .'/charge/{orderId}',  [PaymentController::class, 'charge']);
+        Route::any($prefix .'/complete/{orderId}',  [PaymentController::class, 'complete']);
     }
 }

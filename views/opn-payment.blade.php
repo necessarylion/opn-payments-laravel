@@ -49,12 +49,15 @@
                         <img src="https://www.opn.ooo/assets/svg/logo-opn-full.svg" class="secured-by-logo" height="20">
                     </div>
                 </div>
-                <iframe name="frame" width="400" src="/opn-payments/methods/{{$orderId}}" frameborder="0" >
+                <iframe name="frame" width="400" src="/{{$prefix}}/methods/{{$orderId}}" frameborder="0" >
                 </iframe>
             </div>
         </div>
     </div>
 </body>
-<script>const orderId = "{{$orderId}}";</script>
+<script>
+    const orderId = "{{$orderId}}";
+    const route = "/{{$prefix}}"
+</script>
 <script src="/opn-payments/opn-script.js"></script>
 </html>

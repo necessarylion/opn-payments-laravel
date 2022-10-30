@@ -10,6 +10,7 @@ return [
         'public_key' => env('OPN_LIVE_PUBLIC_KEY'),
         'secret_key' => env('OPN_LIVE_SECRET_KEY'),
     ],
+    'route_prefix' => 'opn-payments',
     'title'       => 'Opn Payments',
     'description' => 'Secured by Opn',
     'logo'        => 'https://placehold.jp/75767a/ffffff/150x150.png?text=Logo',

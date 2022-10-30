@@ -31,12 +31,13 @@ class PaymentController extends Controller {
     }
 
     public function renderPayment($orderId) {
+        $prefix = config('opn-payments.route_prefix', 'opn-payments');
         $attempt = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
         if (!$attempt) {
             throw new Exception($orderId . ' Not found');
         }
         if ($attempt->payment_successful) {
-            return redirect('/opn-payments/success/' . $attempt->order_id);
+            return redirect("/$prefix/success/" . $attempt->order_id);
         }
         $config = config('opn-payments');
         return view('opn-payment', [
@@ -44,6 +45,7 @@ class PaymentController extends Controller {
             'currency' => $attempt->currency,
             'backUrl'  => $attempt->cancel_uri,
             'orderId'  => $orderId,
+            'prefix'   => $prefix,
             'locale'   => $attempt->language,
             'config'   => $config,
         ]);
@@ -53,6 +55,7 @@ class PaymentController extends Controller {
         $request->validate([
             'token' => 'required',
         ]);
+        $prefix = config('opn-payments.route_prefix', 'opn-payments');
         $attempt = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
         if (!$attempt) {
             throw new Exception($orderId . ' Not found');
@@ -64,7 +67,7 @@ class PaymentController extends Controller {
         $charge->language  = $attempt->language;
         $charge->ip        = $request->ip();
         $charge->metaData  = $attempt->meta_data;
-        $charge->returnUri = config('app.url') . '/opn-payments/complete/' . $attempt->order_id;
+        $charge->returnUri = config('app.url') . "/$prefix/complete/" . $attempt->order_id;
         $result            = OpnPayments::createCharge($charge);
 
         $qrCode            = OpnPayments::getQR($result->source);
@@ -90,6 +93,7 @@ class PaymentController extends Controller {
     }
 
     public function complete($orderId) {
+        $prefix = config('opn-payments.route_prefix', 'opn-payments');
         $attempt       = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
         $paymentCharge = $attempt->charge();
         if (!$attempt) {
@@ -101,9 +105,9 @@ class PaymentController extends Controller {
         $charge = $this->completePayment($attempt);
         $paymentSuccessful = OpnPayments::paymentSuccessful($charge, $attempt);
         if ($paymentSuccessful) {
-            return redirect('/opn-payments/success/' . $attempt->order_id);
+            return redirect("/$prefix/success/" . $attempt->order_id);
         }
-        return redirect('/opn-payments/failed/' . $attempt->order_id);
+        return redirect("/$prefix/failed/" . $attempt->order_id);
     }
 
     public function status($orderId) {
@@ -123,13 +127,14 @@ class PaymentController extends Controller {
     }
 
     public function success($orderId) {
+        $prefix = config('opn-payments.route_prefix', 'opn-payments');
         $attempt = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
         $charge = $this->completePayment($attempt);
         if (!$attempt) {
             return ['status' => false];
         }
         if (!$attempt->payment_successful) {
-            return redirect('/opn-payments/failed/' . $attempt->order_id);
+            return redirect("/$prefix/failed/" . $attempt->order_id);
         }
         return view('opn-success', [
             'config'  => config('opn-payments'),
@@ -139,13 +144,14 @@ class PaymentController extends Controller {
     }
 
     public function failed($orderId) {
+        $prefix = config('opn-payments.route_prefix', 'opn-payments');
         $attempt = OpnPaymentsAttempt::where('order_id', $orderId)->first(); 
         $charge  = $this->completePayment($attempt);
         if (!$attempt) {
             return ['status' => false];
         }
         if ($attempt->payment_successful) {
-            return redirect('/opn-payments/success/' . $attempt->order_id);
+            return redirect("/$prefix/success/" . $attempt->order_id);
         }
         return view('opn-failed', [
             'config'  => config('opn-payments'),
