@@ -18,6 +18,11 @@ class PaymentController extends Controller {
         }
         $file  = __DIR__ . '/../../views/pay-js.blade.php';
         $style = config('opn-payments.omise-js-style');
+        $style['securedBySection'] = [
+            'position' => 'fixed',
+            'left'     => '-600px',
+            'bottom'   => '40px',
+        ];
         return View::file($file, [
             'amount'         => $attempt->opn_amount,
             'currency'       => $attempt->currency,

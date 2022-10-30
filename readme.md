@@ -39,6 +39,8 @@ public function boot()
 OPN_MODE=test  # test or live
 OPN_TEST_PUBLIC_KEY=pkey_***
 OPN_TEST_SECRET_KEY=skey_***
+OPN_LIVE_PUBLIC_KEY=pkey_***
+OPN_LIVE_SECRET_KEY=skey_***
 ```
 - Make sure that `APP_URL` include port if you are running on port
 - Example
