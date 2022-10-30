@@ -62,6 +62,17 @@ $payload->paymentMethods = OpnPayments::paymentMethods();
 return redirect(OpnPayments::getRedirectUrl($payload)->authorized_uri);
 ```
 
+| **fields**     | **Type** | **Description**                                                                                                                                     |
+|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `amount`         | `int`      | Amount to charge                                                                                                                                    |
+| `currency`       | `string`   | Currency of the amount eg. THB, SGD, RGN. You can use `OpnPaymentsCurrency` helper class for this field                                             |
+| `cancelUri`      | `string`   | Url to redirect back if the user cancel payment                                                                                                     |
+| `redirectUri`    | `string`   | Url to redirect back if the payment completed                                                                                                       |
+| `orderId`       | `string`   | Unique order Id.                                                                                                                                    |
+| `paymentMethods` | `array`    | Array of payment methods.  You can see list of supported methods [here](https://www.omise.co/omise-js#supported-payment-methods-for-pre-built-form) |
+| `locale`         | `string`   | Language, such ash , en, th, ja. You can use `OpnPaymentsLocale` helper class for this field                                                        |
+| `metaData`       | `array`    | Extra meta data to append.                                                                                                                          |
+
 ### Handle payment completed
 
 - in `app/Listeners/OpnPaymentHandler.php`, you can check the status of payment attempt.
