@@ -90,6 +90,7 @@ If you want to show list of products in payment page, you can do as below.
 ```php
 $payload->metaData = [
     'product' => [
+        'image' => 'https://placehold.jp/75767a/ffffff/150x150.png'
         'name' => 'I Phone',
         'quantity' => '1',
         'price' => '320000',
@@ -102,6 +103,7 @@ OR
 $payload->metaData = [
     'products' => [
         [
+            'image' => 'https://placehold.jp/75767a/ffffff/150x150.png'
             'name' => 'I Phone',
             'quantity' => '1',
             'price' => '320000',
