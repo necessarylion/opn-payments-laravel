@@ -45,12 +45,20 @@ class PaymentController extends Controller {
             return redirect("/$prefix/success/" . $attempt->order_id);
         }
         $config = config('opn-payments');
+        $products = [];
+        if(isset($attempt->meta_data['product'])) {
+            $products = [$attempt->meta_data['product']];
+        }
+        if(isset($attempt->meta_data['products'])) {
+            $products = $attempt->meta_data['products'];
+        }
         return view('opn-payment', [
             'amount'   => $attempt->amount, 
             'currency' => $attempt->currency,
             'backUrl'  => $attempt->cancel_uri,
             'orderId'  => $orderId,
             'prefix'   => $prefix,
+            'products' => $products,
             'locale'   => $attempt->language,
             'config'   => $config,
         ]);
@@ -107,6 +115,7 @@ class PaymentController extends Controller {
         if (!$paymentCharge) {
             throw new Exception('Charge Not found');
         }
+        sleep(2);
         $charge = $this->completePayment($attempt);
         $paymentSuccessful = OpnPayments::paymentSuccessful($charge, $attempt);
         if ($paymentSuccessful) {

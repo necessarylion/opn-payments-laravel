@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Opn Payment | {{$config['title']}}</title>
+    <title>Opn Payment | {{ $config['title'] }}</title>
     <style>
         :root {
-            --themeColor : {{ $config['theme']['color'] }};
-            --primaryTextColor : {{ $config['theme']['primaryTextColor'] }};
-            --secondaryTextColor : {{ $config['theme']["secondaryTextColor"] }};
+            --themeColor: {{ $config['theme']['color'] }};
+            --primaryTextColor: {{ $config['theme']['primaryTextColor'] }};
+            --secondaryTextColor: {{ $config['theme']['secondaryTextColor'] }};
         }
     </style>
     <link href='https://cdn.omise.co/fonts/circular.css' rel='stylesheet'>
     <link href='/opn-payments/opn-style.css' rel='stylesheet'>
 </head>
+
 <body>
     <div class="container">
         <div class="main">
             <div class="left">
                 <div class="left-box">
                     <div class="back-container">
-                        <a href="{{$backUrl}}" class="back">
+                        <a href="{{ $backUrl }}" class="back">
                             <svg class="back" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                 width="24px" fill="{{ $config['theme']['primaryTextColor'] }}">
                                 <path d="M0 0h24v24H0z" fill="none" />
@@ -32,32 +34,60 @@
                     </div>
                     <div class="shop-info">
                         <div>
-                            <p class="primary">{{$config['title']}}</p>
-                            <p class="secondary">{{$config['description']}}</p>
+                            <p class="primary">{{ $config['title'] }}</p>
+                            <p class="secondary">{{ $config['description'] }}</p>
                         </div>
-                        <img class="logo" src="{{$config['logo']}}" width="{{$config['logo_width']}}" alt="">
+                        <img class="logo" src="{{ $config['logo'] }}" width="{{ $config['logo_width'] }}"
+                            alt="">
+                    </div>
+                    <br>
+                    <div class="product-container">
+                        <div class="products">
+                            @foreach ($products as $product)
+                                <div class="product">
+                                    <div class="flex-row">
+                                        @if (!empty($product['image']))
+                                            <img class="product-image" src="{{ $product['image'] }}" alt="">
+                                        @endif
+                                        <div>{{ isset($product['quantity']) ? $product['quantity'] : 1 }} &nbsp; x
+                                            &nbsp; {{ $product['name'] }}</div>
+                                    </div>
+                                    <div class="product-price">
+                                        {{ \OpnPayments\OpnPayments::currencyCast($product['price']) }}
+                                        {{ $currency }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="total">
+                            <h3>Total Price</h3>
+                            <h3>{{ \OpnPayments\OpnPayments::currencyCast($amount) }} {{ $currency }}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="right">
                 <div id="qr-container" class="qr-container">
-                    
+
                 </div>
                 <div id="secured-by" class="secured-by">
                     <div class="secured-by-bottom">
                         <span>Secured by </span>
-                        <img src="https://www.opn.ooo/assets/svg/logo-opn-full.svg" class="secured-by-logo" height="20">
+                        <img src="https://www.opn.ooo/assets/svg/logo-opn-full.svg" class="secured-by-logo"
+                            height="20">
                     </div>
                 </div>
-                <iframe name="frame" width="400" src="/{{$prefix}}/methods/{{$orderId}}" frameborder="0" >
+                <iframe name="frame" width="400" src="/{{ $prefix }}/methods/{{ $orderId }}"
+                    frameborder="0">
                 </iframe>
             </div>
         </div>
     </div>
 </body>
 <script>
-    const orderId = "{{$orderId}}";
-    const route = "/{{$prefix}}"
+    const orderId = "{{ $orderId }}";
+    const route = "/{{ $prefix }}"
 </script>
 <script src="/opn-payments/opn-script.js"></script>
+
 </html>

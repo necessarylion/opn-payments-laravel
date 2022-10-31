@@ -1,6 +1,7 @@
 <?php
 namespace OpnPayments\Traits;
 
+use Exception;
 use OpnPayments\Models\OpnPaymentsCharge;
 
 trait OpnPaymentsPayJsHelper {
@@ -28,6 +29,15 @@ trait OpnPaymentsPayJsHelper {
         return null;
     }
 
+    public static function getQRContent($qrCode) {
+        try {
+            return file_get_contents($qrCode);
+        }
+        catch(Exception $e) {
+            return null;
+        }
+    }
+
     public static function paymentSuccessful($charge, $attempt) {
         return (
             $attempt->manual_capture 
@@ -38,5 +48,16 @@ trait OpnPaymentsPayJsHelper {
             && $charge->status == OpnPaymentsCharge::STATUS_SUCCESS 
             && empty($charge->failure_code)
         );
+    }
+
+    public static function currencyCast($value, $decimal = 0) {
+        if ($decimal == 0) {
+          $value = number_format((float) $value, 2, '.', ',');
+          $value = rtrim($value, '0');
+          $value = rtrim($value, '.');
+        } else {
+          $value = number_format((float) $value, 2, '.', ',');
+        }
+        return $value;
     }
 }
