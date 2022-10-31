@@ -86,21 +86,25 @@ return redirect(OpnPayments::getRedirectUrl($payload)->authorized_uri);
 ## Product List
 If you want to show list of products in payment page, you can do as below.
 
+*Single Product*
 ```php
 $payload->metaData = [
     'product' => [
+        'image' => 'https://placehold.jp/75767a/ffffff/150x150.png'
         'name' => 'I Phone',
         'quantity' => '1',
         'price' => '320000',
     ]
 ];
 ```
-OR 
+
+*Multiple Product*
 
 ```php
 $payload->metaData = [
     'products' => [
         [
+            'image' => 'https://placehold.jp/75767a/ffffff/150x150.png'
             'name' => 'I Phone',
             'quantity' => '1',
             'price' => '320000',
