@@ -10,6 +10,9 @@ body {
     justify-content: center;
     height: 100vh;
 }
+.text-center {
+    text-align: center;
+}
 .main {
     display: flex;
     flex-direction: row;
@@ -316,7 +319,7 @@ iframe {
 }
 .info .retry-button {
     display: block;
-    padding: 0px 20px 0px 20px;
+    padding: 0px 10px 0px 10px;
     height: 44px;
     border: 0px;
     background-color: #e8e8e8;
