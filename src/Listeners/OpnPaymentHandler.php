@@ -21,6 +21,7 @@ class OpnPaymentHandler {
      */
     public function handle(OpnPaymentCompleted $event) {
         $attempt = $event->attempt;
+        $charge = $event->charge;
         if ($attempt->payment_successful) {
             // handle payment success here
         } else {

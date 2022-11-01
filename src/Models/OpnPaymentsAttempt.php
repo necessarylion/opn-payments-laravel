@@ -27,6 +27,15 @@ class OpnPaymentsAttempt extends Model {
         return $this->hasMany(OpnPaymentsCharge::class);
     }
 
+    public function pendingCharges() {
+        return $this->charges()
+            ->where('status', 'pending')
+            ->where('created_at', '>', now()->subHours(24))
+            ->orderBy('id', 'desc')
+            ->limit('5')
+            ->where('payment_successful', 0);
+    }
+
     public function charge($paymentMethod = null) {
         $query = $this->charges()->orderBy('id', 'desc');
         if (!empty($paymentMethod)) {
