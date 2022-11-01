@@ -190,7 +190,7 @@ class PaymentController extends Controller {
         $attempt->save();
 
         if ($charge->status != OpnPaymentsCharge::STATUS_PENDING) {
-            OpnPaymentCompleted::dispatch($attempt);
+            OpnPaymentCompleted::dispatch($attempt, $paymentCharge);
         }
         return $charge;
     }

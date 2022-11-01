@@ -3,6 +3,7 @@ namespace OpnPayments;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use OpnPayments\Commands\OpnPaymentsScheduler;
 use OpnPayments\Controllers\PaymentController;
 
 class OpnPaymentsServiceProvider extends ServiceProvider {
@@ -35,6 +36,8 @@ class OpnPaymentsServiceProvider extends ServiceProvider {
         $this->app->singleton(OpnPayments::class, function() {
             return OpnPayments::init();
         });
+
+        $this->commands([OpnPaymentsScheduler::class]);
 
         $prefix = config('opn-payments.route_prefix', 'opn-payments');
 

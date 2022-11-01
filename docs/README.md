@@ -118,7 +118,8 @@ $payload->metaData = [
 
 ```php
 public function handle(OpnPaymentCompleted $event) {
-    $attempt = $event->attempt;
+     $attempt = $event->attempt;
+    $charge = $event->charge;
     if ($attempt->payment_successful) {
         // handle payment success here
     } else {
@@ -127,11 +128,15 @@ public function handle(OpnPaymentCompleted $event) {
 }
 ```
 
-**To get last charge of payment attempt, you can do**
+## Scheduler
+Register scheduler for pending charges.
 
+This scheduler will get all pending charge from records withing 24 hours.\ 
+Then it will fetch status from Opn API and update if success or failed.
+
+In `app/Console/Kernel.php` inside `schedule()` function add below line.
 ```php
-$charge = $attempt->charge();
-$opnChargeId = $charge->charge_id;
+$schedule->command('opn-payments-scheduler')->everyFiveMinutes();
 ```
 
 ## Contribute

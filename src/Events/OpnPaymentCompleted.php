@@ -6,19 +6,22 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use OpnPayments\Models\OpnPaymentsAttempt;
+use OpnPayments\Models\OpnPaymentsCharge;
 
 class OpnPaymentCompleted {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public ?OpnPaymentsAttempt $attempt = null;
+    public ?OpnPaymentsCharge $charge = null;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(OpnPaymentsAttempt $attempt) {
+    public function __construct(OpnPaymentsAttempt $attempt, OpnPaymentsCharge $charge) {
         $this->attempt = $attempt;
+        $this->charge = $charge;
     }
 
     /**
