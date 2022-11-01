@@ -41,6 +41,7 @@
                 </tbody>
             </table>
             <br>
+            <p>Redirecting to merchant in <span id="counter">10</span></p>
             <a href="{{$attempt['redirect_uri']}}" class="button">Back to Merchant</a>
             <br>
             <div class="secured-by-bottom">
@@ -50,5 +51,23 @@
         </div>
     </div>
 </body>
+<script>
+    let timeToWait = 10
+    let interval;
 
+    window.addEventListener('load', (e) => {
+       setTimeout(() => {
+            window.location.href = "{{$attempt['redirect_uri']}}";
+       }, timeToWait * 1000);
+
+       interval = setInterval(() => {
+        timeToWait--
+        let ele = document.getElementById('counter')
+        ele.innerHTML = timeToWait;
+        if(timeToWait <= 0) {
+            clearInterval(interval)
+        }
+       }, 1000);
+    });
+</script>
 </html>
