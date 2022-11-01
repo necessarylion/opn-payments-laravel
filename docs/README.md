@@ -135,8 +135,7 @@ public function handle(OpnPaymentCompleted $event) {
 ## Scheduler
 Register scheduler for pending charges.
 
-This scheduler will get all pending charge from records withing 24 hours.\ 
-Then it will fetch status from Opn API and update if success or failed.
+*This scheduler will get all pending charge from records withing 24 hours. Then it will fetch status from Opn API and update if success or failed.*
 
 In `app/Console/Kernel.php` inside `schedule()` function add below line.
 ```php
