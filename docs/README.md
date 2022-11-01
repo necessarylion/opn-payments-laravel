@@ -7,6 +7,7 @@ This package is [Opn Payments (former name Omise)](https://opn.ooo) Laravel pack
 
 <img src="https://raw.githubusercontent.com/necessarylion/opn-payments-laravel/master/preview-desktop.png" alt="drawing" height="300"/> <img src="https://raw.githubusercontent.com/necessarylion/opn-payments-laravel/master/preview-mobile.png" alt="drawing" height="300"/>
 
+<img src="https://raw.githubusercontent.com/necessarylion/opn-payments-laravel/master/flow-diagram.png" alt="flow diagram" height="368"/>
 
 ## Installation
 
