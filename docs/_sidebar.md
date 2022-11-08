@@ -6,6 +6,7 @@
     * [Product List](/#product-list)
     * [Event Listener](/#event-listener)
     * [Scheduler](/#scheduler)
+    * [Additional Functions](/AdditionalFunctions.md)
 * Others
     * [Development Process](/#contribute)
     * [Releases](/Releases.md)
