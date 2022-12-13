@@ -1,4 +1,4 @@
-# Opn Payment Laravel
+# Opn Payment Laravel (Unofficial)
 
 [![php](https://badgen.net/badge/icon/php?icon=packagist&label=Laravel&nbsp;Package)](https://packagist.org/packages/necessarylion/opn-payments-laravel) ![php](https://badgen.net/badge/Opn&nbsp;Payments/Laravel/red)
 
