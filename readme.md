@@ -1,10 +1,10 @@
-# Opn Payment Laravel
+# Opn Payments Laravel Package
 
 [![php](https://badgen.net/badge/icon/php?icon=packagist&label=Laravel&nbsp;Package)](https://packagist.org/packages/necessarylion/opn-payments-laravel) ![php](https://badgen.net/badge/Opn&nbsp;Payments/Laravel/red)
 
-This package is [Opn Payments (former name Omise)](https://opn.ooo) Laravel package using omise-php sdk. This package will help to generate redirect url with ready made payment form. You will only need to write few lines of code to create payment in your Laravel project. This package will handle all creating charge, handling complete payment automatically. We made it very easy to integrate payment system in your project. 
+A Laravel package for integrating [Opn Payments (formerly Omise)](https://opn.ooo) using the omise-php SDK. This package provides a simple way to implement payments in your Laravel project with a ready-made payment form and automatic payment handling.
 
-[# Documentation](https://necessarylion.github.io/opn-payments-laravel)
+[View Full Documentation](https://necessarylion.github.io/opn-payments-laravel)
 
 <img src="https://raw.githubusercontent.com/necessarylion/opn-payments-laravel/master/preview-desktop.png" alt="drawing" height="300"/> <img src="https://raw.githubusercontent.com/necessarylion/opn-payments-laravel/master/preview-mobile.png" alt="drawing" height="300"/>
 
